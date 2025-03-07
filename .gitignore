@@ -1,2 +1,9 @@
 venv/
 logs/
+_pycache_
+artifacts/
+.vscode/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
