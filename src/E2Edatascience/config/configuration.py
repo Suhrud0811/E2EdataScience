@@ -1,6 +1,6 @@
 from src.E2Edatascience.constants import *
 from src.E2Edatascience.utils.common import create_directories,read_yaml
-from src.E2Edatascience.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig
+from src.E2Edatascience.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig,ModelTrainerConfig
 
 
 
@@ -60,6 +60,28 @@ class ConfigurationManager():
          )
 
          return data_transformation_config
+    
+
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+         
+         config = self.config.model_trainer
+         schema = self.schema.TARGET
+         params = self.params.ElasticNet
+
+         create_directories([config.root_dir])
+
+
+         model_trainer_config = ModelTrainerConfig(
+              config.root_dir,
+              config.train_data,
+              config.test_data,
+              config.model_name,
+              params.alpha,
+              params.l1_ratio,
+              schema.name
+         )
+
+         return model_trainer_config
 
 
     
