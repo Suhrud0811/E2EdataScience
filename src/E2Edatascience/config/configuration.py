@@ -1,6 +1,6 @@
 from src.E2Edatascience.constants import *
 from src.E2Edatascience.utils.common import create_directories,read_yaml
-from src.E2Edatascience.entity.config_entity import DataIngestionConfig,DataValidationConfig
+from src.E2Edatascience.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig
 
 
 
@@ -45,6 +45,23 @@ class ConfigurationManager():
       )
 
       return data_validation_config
+    
+
+    def get_data_transformation_config(self)->DataTransformationConfig:
+         
+         config = self.config.data_transformation
+
+         create_directories([config.root_dir])
+
+         data_transformation_config = DataTransformationConfig(
+              config.root_dir,
+              config.data_path,
+              config.STATUS_FILE
+         )
+
+         return data_transformation_config
+
+
     
 
 
