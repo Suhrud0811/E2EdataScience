@@ -7,3 +7,5 @@ artifacts/
 **/*.pyc
 **/*.pyo
 **/*.pyd
+/mlruns
+.env

@@ -29,7 +29,17 @@ class ModelTrainer():
 
         lr = ElasticNet(alpha=self.config.alpha, l1_ratio=self.config.l1_ratio)
         lr.fit(train_x,train_y)
+        
+
+        
+                
+
         model_name = self.config.model_name.format(algorithm_name = "ElasticNet", timestamp = datetime.now().strftime("%Y%m%d_%H%M%S") )
+
+        with open(os.path.join(self.config.root_dir,'latest.txt'),'w') as f:
+            f.write(f"Latest trained model:{model_name}")
+
+
         joblib.dump(lr, os.path.join(self.config.root_dir,model_name) )
         logger.info(f"Model Saved at location: {os.path.join(self.config.root_dir,model_name)} ")
 

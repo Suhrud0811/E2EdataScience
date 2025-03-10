@@ -1,6 +1,7 @@
 from src.E2Edatascience.constants import *
 from src.E2Edatascience.utils.common import create_directories,read_yaml
-from src.E2Edatascience.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig,ModelTrainerConfig
+from src.E2Edatascience.entity.config_entity import (DataIngestionConfig,DataValidationConfig,DataTransformationConfig,
+                                                     ModelTrainerConfig,ModelEvaluationConfig)
 
 
 
@@ -82,10 +83,30 @@ class ConfigurationManager():
          )
 
          return model_trainer_config
-
-
     
 
+    def get_model_evaluation_config(self):
+
+      config = self.config.model_evaluation
+      params = self.params.ElasticNet
+      schema = self.schema.TARGET
+
+      create_directories([config.root_dir])
+
+      model_evaluation_config = ModelEvaluationConfig(
+           
+            config.root_dir,
+            config.test_data,
+            config.model_path,
+            config.model_load_path,
+            config.metric_file_name,
+            config.mlflow_uri,
+            schema.name,
+            params
+
+      )
+    
+      return model_evaluation_config
 
     
 
